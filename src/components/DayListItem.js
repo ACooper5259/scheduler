@@ -8,7 +8,7 @@ export default function DayListItem(props) {
   const dayListItemClass = classNames({
     'day-list__item': true, 
     "day-list__item--selected": props.selected,
-    "day-list__item--full": props.full
+    "day-list__item--full": !props.spots
   });
 
   const formatSpots = (props) => {

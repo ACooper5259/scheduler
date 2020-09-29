@@ -32,9 +32,9 @@ storiesOf("Button", module)
   })
   .add("Unselected", () => <DayListItem name="Monday" spots={5} />) 
   .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
-  .add("Full", () => <DayListItem name="Monday" spots={0} full />)
+  .add("Full", () => <DayListItem name="Monday" spots={0} />)
   .add("Clickable", () => (
-    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} clickable /> // action() allows us to create a callback that appears in the actions panel when clicked
+    <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> 
   ));
 
   const days = [
