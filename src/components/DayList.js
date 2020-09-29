@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import DayListItem from './DayListItem';
 var classNames = require('classnames');
 
+
+
 export default function DayList(props) {
-  const {id, name, spots} = props
+  
   const dayList = days.map (day => {
     return(<DayListItem
       key = {day.id}
@@ -14,5 +16,5 @@ export default function DayList(props) {
       />
     )
   })
-  return <ul> dayList{days}</ul>
+  return <ul> {dayList} </ul>
 }

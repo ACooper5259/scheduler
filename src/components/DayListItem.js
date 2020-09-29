@@ -4,7 +4,7 @@ var classNames = require('classnames');
 
 
 export default function DayListItem(props) {
-
+  
   const dayListItemClass = classNames({
     'day-list__item': true, 
     "day-list__item--selected": props.selected,
@@ -23,8 +23,6 @@ export default function DayListItem(props) {
       return remainingSpots+' spots remaining'
     }
   }
-
-const noSpot = (props)
 
   return (
     <li 
