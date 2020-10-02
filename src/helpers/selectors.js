@@ -11,6 +11,18 @@ const getAppointmentsForDay = (state, day) => {
   return dayObject.appointments.map(appointmentId => {return state.appointments[appointmentId]})
 };
 
+const getInterviewersForDay = (state, day) => {
+  if (!state.days){
+    return []
+  }
+  const filteredDay = state.days.filter (elem => elem.name === day)
+  const dayObject = filteredDay[0]
+  if (!dayObject) {
+    return []
+  } 
+  return dayObject.interviewers.map(interviewerId => {return state.interviewers[interviewerId]})
+};
+
 const getInterview = (state, interview) => {
   
   // interview = state.appointments
