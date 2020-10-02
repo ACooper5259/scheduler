@@ -40,4 +40,5 @@ const getInterview = (state, interview) => {
 }
 
 export {getAppointmentsForDay}
+export {getInterviewersForDay}
 export {getInterview}
