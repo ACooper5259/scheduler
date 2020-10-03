@@ -30,13 +30,29 @@ export default function Application(props) {
     }, [])
     
   function bookInterview(id, interview) {
-  console.log("id  and interview are:",id, interview);
-}
+    // update appointment which had a interview value of null, replacing with the new interview object
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    // update the appointments object, by adding the appointment object from abov to the matching id.
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    // update state by ADDING the new appointments object
+    setState({
+      ...state, 
+      appointments
+    });
+    // console.log("id  and interview are:",id, interview);
+  };
+  
 
 
   const setDay = day => {
     setState({...state, day})
-    };
+  };
   
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   
