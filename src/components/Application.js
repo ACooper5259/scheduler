@@ -41,17 +41,32 @@ export default function Application(props) {
       [id]: appointment
     };
     // update state by ADDING the new appointments object
-    setState({
-      ...state, 
-      appointments
-    });
+    // setState({
+    //   ...state, 
+    //   appointments
+    // });
 
     // PUT Request to update database with new appointment information
     return axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
       .then(setState({...state, appointments}))
   };
   
-
+  function cancelInterview (id, interview) {
+    // update appointment with interview set to null
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    // update the appointments object, by removing the appointment object from the matching id.
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+    // PUT Request to cancel interview information
+    return axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
+      .then(setState({...state, appointments}))
+  };
+  
 
   const setDay = day => {
     setState({...state, day})
@@ -72,6 +87,7 @@ export default function Application(props) {
       interview = {interview}
       interviewers = {interviewers}
       bookInterview = {bookInterview}
+      cancelInterview = {cancelInterview}
       />)
     });
     
