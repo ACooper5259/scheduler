@@ -49,7 +49,6 @@ export default function Application(props) {
     // PUT Request to update database with new appointment information
     return axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
       .then(response => {console.log(response)})
-    // console.log("id  and interview are:",id, interview);
   };
   
 
