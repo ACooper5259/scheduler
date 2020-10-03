@@ -5,6 +5,8 @@ import Show from './Show';
 import Empty from './Empty';
 import useVisualMode from "../../hooks/useVisualMode"
 import Form from './Form';
+import InterviewerList from 'components/InterviewerList';
+
 
 
 export default function Appointment(props) {
@@ -15,20 +17,37 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
   const interview = props.interview
+  console.log (props.interview)
   const time = props.time
+
+  
+
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+    console.log(interview)
+    props.bookInterview(props.id, interview)
+  }
+  
+// console.log('appt index props:', props)
+
     return (
       <>
       <Header time={time}>  </Header>
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer}
+          student={interview.student}
+          interviewer={interview.interviewer}
+          
         />)}
       {mode === CREATE && (
         <Form
-          interviewers={[]}
-          onCancel = {() => transition (EMPTY)}
+          interviewers={props.interviewers}
+          onCancel = {() => transition (EMPTY)} 
+          onSave = {(name, interviewer) => save(name, interviewer)}
 
           />)}
       )

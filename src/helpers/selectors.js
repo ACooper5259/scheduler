@@ -8,6 +8,7 @@ const getAppointmentsForDay = (state, day) => {
   if (!dayObject) {
     return []
   } 
+  // console.log(dayObject.interviewers)
   return dayObject.appointments.map(appointmentId => {return state.appointments[appointmentId]})
 };
 
@@ -20,8 +21,11 @@ const getInterviewersForDay = (state, day) => {
   if (!dayObject) {
     return []
   } 
-  return dayObject.interviewers.map(interviewerId => {return state.interviewers[interviewerId]})
+  // console.log("appointments", dayObject.appointments)
+  // console.log("interviewers:", dayObject.interviewers)
+  return dayObject.interviewers.map(interviewersId => {return state.interviewers[interviewersId]})
 };
+
 
 const getInterview = (state, interview) => {
   
@@ -31,8 +35,8 @@ const getInterview = (state, interview) => {
   };
   let interviewArr = [];
   interviewArr.push(interview)
-  console.log('interviewArr[0]', interviewArr[0])
-  console.log('state.interviewers', state.interviewers[interviewArr[0].interviewer])
+  // console.log('interviewArr[0]', interviewArr[0])
+  // console.log('state.interviewers', state.interviewers[interviewArr[0].interviewer])
   return {
     "student": interview.student, 
     "interviewer": state.interviewers[interviewArr[0].interviewer]
