@@ -18,6 +18,7 @@ export default function Appointment(props) {
   const SAVING = "STATUS";
   const CONFIRM = "CONFIRM";
   const DELETING = "STATUS";
+  const EDIT = "EDIT";
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -33,7 +34,9 @@ export default function Appointment(props) {
     props.cancelInterview(props.id, interview)
     transition (EMPTY)
   }
-
+  function edit () {
+    transition(EDIT)
+  }
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -56,6 +59,7 @@ export default function Appointment(props) {
           student={interview.student}
           interviewer={interview.interviewer}
           onDelete = {() => confirm()}
+          onEdit = {() => edit()}
           
         />)}
       {mode === CREATE && (
@@ -63,7 +67,13 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel = {() => transition (EMPTY)} 
           onSave = {(name, interviewer) => save(name, interviewer)}
-
+        />)}
+        {mode === EDIT && (
+        <Form
+          name = {props.name}
+          interviewers={props.interviewers}
+          onCancel = {() => transition (SHOW)} 
+          onSave = {(name, interviewer) => save(name, interviewer)}
         />)}
       {mode === SAVING && (
         <Status
@@ -74,6 +84,7 @@ export default function Appointment(props) {
         <Confirm
         message = "This action can not be undone. Confirm delete?"
         onConfirm = {() => confirmDelete()}
+        onCancel ={()=>{back(SHOW)}}
       />)}
       {mode === DELETING && (
         <Status
