@@ -25,8 +25,11 @@ export default function Appointment(props) {
   console.log (props.interview)
   const time = props.time
 
-  function erase() {
+  function confirm() {
     transition (CONFIRM)
+  }
+
+  function confirmDelete(){
     props.cancelInterview(props.id, interview)
     transition (EMPTY)
   }
@@ -52,7 +55,7 @@ export default function Appointment(props) {
         <Show
           student={interview.student}
           interviewer={interview.interviewer}
-          onDelete = {(id,interview) => erase(id, interview)}
+          onDelete = {() => confirm()}
           
         />)}
       {mode === CREATE && (
@@ -70,6 +73,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm
         message = "This action can not be undone. Confirm delete?"
+        onConfirm = {() => confirmDelete()}
       />)}
       {mode === DELETING && (
         <Status
