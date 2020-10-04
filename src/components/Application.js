@@ -28,6 +28,7 @@ export default function Application(props) {
       setState ({...state, days: response[0].data, appointments: response[1].data, interviewers: response[2].data})
     })
     }, [])
+
     
   function bookInterview(id, interview) {
     // update appointment which had a interview value of null, replacing with the new interview object
@@ -40,33 +41,41 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    // update state by ADDING the new appointments object
-    // setState({
-    //   ...state, 
-    //   appointments
-    // });
-
+    
     // PUT Request to update database with new appointment information
-    return axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
-      .then(setState({...state, appointments}))
+    return new Promise((resolve, reject) => {
+      axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
+      .then(() => {
+        setState({...state, appointments})
+        resolve()
+      });
+    });
   };
   
-  function cancelInterview (id,interview) {
+  function cancelInterview (id) {
     // update appointment with interview set to null
     const appointment = {
       ...state.appointments[id],
       interview: null
     }
     // update the appointments object, by removing the appointment object from the matching id.
-      const appointments = {
-        ...state.appointments,
-        [id]: appointment
-      };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
     // Delete Request to set interview to null
-    return axios.delete('http://localhost:8001/api/appointments/' + id , {params: {interview}} )
-      .then(setState({...state, appointments}))
-  };
-  
+    return new Promise((resolve, reject) => {
+      axios.delete('http://localhost:8001/api/appointments/' + id )
+        .then(() => {
+          setState({...state, appointments})
+          resolve()
+        });
+        // .catch (reject())
+        // .then(transition (DELETING))
+        // .catch (transition (ERROR_DELETING, true))
+
+    });
+  }
 
   const setDay = day => {
     setState({...state, day})
