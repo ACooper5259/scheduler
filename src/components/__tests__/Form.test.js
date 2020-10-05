@@ -35,23 +35,30 @@ describe("Form", () => {
 
 
 
-  xit("validates that the student name is not blank", () => {
+  it("validates that the student name is not blank", () => {
     /* 1. validation is shown */
      /* 1.1. Create the mock onSave function */
-    // const mockOnSave = jest.fn()
-    // /* 1.2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
-    // const { container, getByText } = render (<Form
-    //   onSave = {mockOnSave}
+    const mockOnSave = jest.fn()
+    /* 1.2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
+    const { getByText } = render (
+      <Form
+      interviewers = {interviewers}
+      onSave = {mockOnSave}
+    
+      />
+    )
     // /* 1.3. Click the save button */
-    // const button = getByText('save')
-    // console.log (prettyDOM(container))
-    // expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
+    const button = getByText('Save')
+    fireEvent.click(button)
+    // fireEvent.click(getByText('Save'))
+    
+    expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
   
     /* 2. onSave is not called */
-    expect(onSave).not.toHaveBeenCalled();
+    expect(mockOnSave).not.toHaveBeenCalled();
   });
   
-  it("calls onSave function when the name is defined", () => {
+  xit("calls onSave function when the name is defined", () => {
     const mockOnSave = jest.fn()
     const { getByText, queryByText } = render (
       <Form 
