@@ -6,71 +6,17 @@ import Appointment from "./Appointment";
 import { getAppointmentsForDay } from "../helpers/selectors";
 import { getInterviewersForDay } from "../helpers/selectors";
 import { getInterview } from "../helpers/selectors";
+import useApplicationData from "hooks/useApplicationData";
 
 
 export default function Application(props) {
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: [],
-    interviewers: {}
-    })
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview, 
+    } = useApplicationData()
     
-  useEffect(() => {
-    const promiseOne = axios.get('http://localhost:8001/api/days')
-    const promiseTwo = axios.get('http://localhost:8001/api/appointments')
-    const promiseThree = axios.get('http://localhost:8001/api/interviewers')
-    const promises = [promiseOne, promiseTwo, promiseThree]
-    
-    Promise.all(promises)
-    .then ((response) => {
-      // console.log (response)
-      setState ({...state, days: response[0].data, appointments: response[1].data, interviewers: response[2].data})
-    })
-    }, [])
-
-    
-  function bookInterview(id, interview) {
-    // update appointment which had a interview value of null, replacing with the new interview object
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    // update the appointments object, by adding the appointment object from abov to the matching id.
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    
-    // PUT Request to update database with new appointment information
-    return axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
-      .then(() => {
-        setState({...state, appointments})
-      })
-  };
-  
-  function cancelInterview (id) {
-    // update appointment with interview set to null
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
-    }
-    // update the appointments object, by removing the appointment object from the matching id.
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    // Delete Request to set interview to null
-    return axios.delete('http://localhost:8001/api/appointments/' + id )
-        .then(() => {
-          setState({...state, appointments})
-        })
-  };
-  
-
-  const setDay = day => {
-    setState({...state, day})
-  };
   
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   
