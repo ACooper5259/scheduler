@@ -37,10 +37,10 @@ export default function Appointment(props) {
   };
   
   function confirmDelete(){
-    transition(DELETING)
-    props.cancelInterview(props.id, interview)
+    transition(DELETING, true)
+    props.cancelInterview(props.id)
     .then(()=> {transition(EMPTY)})
-    
+    .catch ((error)=> {transition (ERROR_DELETE, true)})
   };
   
   function edit () {
@@ -55,6 +55,7 @@ export default function Appointment(props) {
     transition(SAVING)
     props.bookInterview(props.id, interview)
     .then (() => {transition(SHOW)})
+    .catch ((error)=> {transition (ERROR_SAVE, true)})
   };
 
   return (

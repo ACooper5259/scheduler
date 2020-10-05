@@ -43,13 +43,10 @@ export default function Application(props) {
     };
     
     // PUT Request to update database with new appointment information
-    return new Promise((resolve, reject) => {
-      axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
+    return axios.put('http://localhost:8001/api/appointments/' + id , {interview} )
       .then(() => {
         setState({...state, appointments})
-        resolve()
-      });
-    });
+      })
   };
   
   function cancelInterview (id) {
@@ -64,18 +61,12 @@ export default function Application(props) {
       [id]: appointment
     };
     // Delete Request to set interview to null
-    return new Promise((resolve, reject) => {
-      axios.delete('http://localhost:8001/api/appointments/' + id )
+    return axios.delete('http://localhost:8001/api/appointments/' + id )
         .then(() => {
           setState({...state, appointments})
-          resolve()
-        });
-        // .catch (reject())
-        // .then(transition (DELETING))
-        // .catch (transition (ERROR_DELETING, true))
-
-    });
-  }
+        })
+  };
+  
 
   const setDay = day => {
     setState({...state, day})
