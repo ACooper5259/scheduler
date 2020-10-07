@@ -10,7 +10,7 @@ afterEach(cleanup);
 describe("Application", () => {
   
   /* Test number 1 */
-  xit("defaults to Monday and changes the schedule when a new day is selected", 
+  it("defaults to Monday and changes the schedule when a new day is selected", 
     async () => {
       const { getByText } = render(<Application />);
 
@@ -20,7 +20,7 @@ describe("Application", () => {
   });
 
   /* Test number 2 */
-  xit("loads data, books an interview and reduces the spots remaining for the first day by 1", 
+  it("loads data, books an interview and reduces the spots remaining for the first day by 1", 
     async() => {
       const { container } = render(<Application />);
 
@@ -44,7 +44,7 @@ describe("Application", () => {
     });
 
   /* Test number 3 */
-  xit("loads data, cancels an interview and increases the spots remaining for Monday by 1",
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1",
     async()=> {
   // 1. Render the Application
       const { container, debug } = render(<Application />);
@@ -73,12 +73,12 @@ describe("Application", () => {
 
   // 9. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
       const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"));
-      expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+      expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
       console.log(prettyDOM(container))
     });
 
     /* Test number 4 */
-  xit("loads data, edits an interview and keeps the spots remaining for Monday the same", () => {
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", () => {
     async() => {
   // 1. Render the Application.
       const { container, debug } = render(<Application />);
@@ -118,7 +118,7 @@ describe("Application", () => {
   });
 
   /* Test number 5 */
-  xit("shows the save error when failing to save an appointment", () => {
+  it("shows the save error when failing to save an appointment", () => {
     
   // Part 1: as per test 2, add new appointment
     async() => {
