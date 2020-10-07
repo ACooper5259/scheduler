@@ -76,7 +76,7 @@ export default function useApplicationData() {
   // reducing spots available in side bar of the app when an appointment is booked
   function reduceSpots(id) {
     let day = getDay(id)
-    console.log(`day :${JSON.stringify(day)}`)
+    // console.log(`day :${JSON.stringify(day)}`)
     let newDay = {
       ...day,
       spots: day.spots - 1
