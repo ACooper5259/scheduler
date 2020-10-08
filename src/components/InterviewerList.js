@@ -8,7 +8,7 @@ export default function InterviewerList(props) {
   //   'interviewers__header': true,
   //   'interviewers__list': true
   // })
-  
+  console.log ('props are:', props)
   const interviewerList = props.interviewers.map (interviewer => {
     return(<InterviewerListItem
       key= {interviewer.id}

@@ -13,7 +13,7 @@ export default function Show(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <img
-
+            data-cy = "edit"
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"

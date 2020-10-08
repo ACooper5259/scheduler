@@ -18,7 +18,7 @@ export default function useApplicationData() {
     
     Promise.all(promises)
     .then ((response) => {
-      // console.log (response)
+      console.log (response)
       setState ({...state, days: response[0].data, appointments: response[1].data, interviewers: response[2].data})
     })
     }, [])
