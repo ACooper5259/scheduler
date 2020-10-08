@@ -9,6 +9,7 @@ Image 2: Audrey Cooper is in the process of booking a new appointment
 ![image](https://user-images.githubusercontent.com/27575454/95412252-662dbc00-08dd-11eb-8419-8f12ac6ff76a.png)
 
 image 3: Editing is simple. Safeguards include a confirmation before deleting an exisitng appointment.
+![image](https://user-images.githubusercontent.com/27575454/95412648-49de4f00-08de-11eb-9350-3db3c57203fe.png)
 
 ### Setup
 
