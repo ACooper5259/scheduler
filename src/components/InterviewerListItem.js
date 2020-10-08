@@ -3,7 +3,7 @@ import "components/InterviewerListItem.scss";
 var classNames = require('classnames');
 
 export default function InterviewerListItem(props) {
-  
+  /* Individual Interviewer Component */
   const interviewerListItemClass = classNames({
     'interviewers__item': true, 
     "interviewers__item-image": props.avatar,
@@ -22,5 +22,5 @@ export default function InterviewerListItem(props) {
       />
       {props.selected && props.name}
     </li>
-  )
-}
+  );
+};

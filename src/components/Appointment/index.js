@@ -12,6 +12,8 @@ import Error from './Error';
 
 
 export default function Appointment(props) {
+  /* Appointment Component */
+
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -25,12 +27,10 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-
-  
   const interview = props.interview
-  // console.log (props.interview)
   const time = props.time
-  
+ 
+  /* Functions */
   function confirm() {
     transition (CONFIRM)
   };
@@ -39,7 +39,7 @@ export default function Appointment(props) {
     transition(DELETING, true)
     props.cancelInterview(props.id)
     .then(()=> {transition(EMPTY)})
-    .catch ((error)=> {transition (ERROR_DELETE, true)})
+    .catch (()=> {transition (ERROR_DELETE, true)})
   };
   
   function edit () {
@@ -54,63 +54,77 @@ export default function Appointment(props) {
     transition(SAVING)
     props.bookInterview(props.id, interview)
     .then (() => {transition(SHOW)})
-    .catch ((error)=> {transition (ERROR_SAVE, true)})
+    .catch (()=> {transition (ERROR_SAVE, true)})
   };
 
+  /* Render */
   return (
     <article data-testid="appointment">
     <Header time={time}>  </Header>
+    
     {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+    
     {mode === SHOW && (
       <Show
         student={interview.student}
         interviewer={interview.interviewer}
         onDelete = {() => confirm()}
         onEdit = {() => edit()}
-        
-      />)}
+      />
+    )}
+    
     {mode === CREATE && (
       <Form
         interviewers={props.interviewers}
         onCancel = {() => transition (EMPTY)} 
         onSave = {(name, interviewer) => save(name, interviewer)}
-      />)}
-      {mode === EDIT && (
+      />
+    )}
+      
+    {mode === EDIT && (
       <Form
         name = {interview.student}
         interviewer={interview.interviewer.id}
         interviewers={props.interviewers}
         onCancel = {() => transition (SHOW)} 
         onSave = {(name, interviewer) => save(name, interviewer)}
-      />)}
+      />
+    )}
+    
     {mode === SAVING && (
       <Status
       message = "Saving"
       />
     )}
+    
     {mode === CONFIRM && (
       <Confirm
       message = "This action can not be undone. Confirm delete?"
       onConfirm = {() => confirmDelete()}
       onCancel ={()=>{back(SHOW)}}
-    />)}
-    {mode === DELETING && (
-      <Status
-      message = "Deleting"
       />
     )}
+    
+    {mode === DELETING && (
+      <Status
+        message = "Deleting"
+      />
+    )}
+
     {mode === ERROR_SAVE && (
       <Error
         message= "Error: your request could not be saved"
         onClose= {()=>{back(EMPTY)}}
       />
     )}
+
     {mode === ERROR_DELETE && (
       <Error
         message= "Error: your request could not be deleted"
         onClose= {()=>{back(SHOW)}}
       />
     )}
+
     </article>
-  )
-}
+  );
+};

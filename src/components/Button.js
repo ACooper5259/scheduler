@@ -3,7 +3,7 @@ import "components/Button.scss";
 var classNames = require('classnames');
 
 export default function Button(props) {
-   
+   /* Application Button Component */
    const buttonClass = classNames("button", {
       "button--confirm": props.confirm,
       "button--danger": props.danger
@@ -18,4 +18,4 @@ export default function Button(props) {
          {props.children}
       </button>
   );
-}
+};

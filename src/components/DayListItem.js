@@ -4,7 +4,7 @@ var classNames = require('classnames');
 
 
 export default function DayListItem(props) {
-  
+  /* Single Day Component */
   const dayListItemClass = classNames({
     'day-list__item': true, 
     "day-list__item--selected": props.selected,
@@ -15,14 +15,14 @@ export default function DayListItem(props) {
     const remainingSpots = props.spots;
     if (remainingSpots === 0) {
       return 'no spots remaining'
-    }
+    };
     if (remainingSpots === 1) {
       return '1 spot remaining'
-    }
+    };
     if (remainingSpots > 1) {
       return remainingSpots+' spots remaining'
-    }
-  }
+    };
+  };
 
   return (
     <li 
@@ -34,4 +34,4 @@ export default function DayListItem(props) {
       <h3 className="text--light">{ formatSpots(props)}</h3>
     </li>
   );
-}
+};

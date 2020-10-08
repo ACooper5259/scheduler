@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Empty(props) {
+  /* Empty Appintment Box */
   return (
     <main className="appointment__add">
       <img
@@ -10,5 +11,5 @@ export default function Empty(props) {
         alt="Add"
       />
     </main>
-  )
-}
+  );
+};
