@@ -15,6 +15,7 @@ describe("Form", () => {
     }
   ];
 
+/* Test number 1 */
   it("renders without student name if not provided", () => {
     const { getByPlaceholderText } = render(
       <Form interviewers = {interviewers}/>
@@ -22,6 +23,7 @@ describe("Form", () => {
     expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
   });
 
+/* Test number 2 */
   it("renders with initial student name", () => {
     const { getByTestId } = render (
       <Form interviewers = {interviewers} name = "Lydia Miller-Jones"/>
@@ -29,30 +31,27 @@ describe("Form", () => {
     expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
   });
 
-
+/* Test number 3 */
   it("validates that the student name is not blank", () => {
-    /* 1. validation is shown */
-     /* 1.1. Create the mock onSave function */
-    const mockOnSave = jest.fn()
-    /* 1.2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
+    // Create the mock onSave function 
+    const mockOnSave = jest.fn();
     const { getByText } = render (
       <Form
       interviewers = {interviewers}
       onSave = {mockOnSave}
-    
       />
-    )
-    // /* 1.3. Click the save button */
+    );
+
     const button = getByText('Save')
     fireEvent.click(button)
-    // fireEvent.click(getByText('Save'))
     
     expect(getByText(/student name cannot be blank/i)).toBeInTheDocument();
   
-    /* 2. onSave is not called */
+    // onSave is not called 
     expect(mockOnSave).not.toHaveBeenCalled();
   });
   
+/* Test number 4 */  
   it("can successfully save after trying to submit an empty student name", () => {
   const onSave = jest.fn();
   const { getByText, getByPlaceholderText, queryByText } = render(
@@ -76,6 +75,7 @@ describe("Form", () => {
   expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
 
+/* Test number 5 */
   it("calls onCancel and resets the input field", () => {
     const onCancel = jest.fn();
     const { getByText, getByPlaceholderText, queryByText } = render(
